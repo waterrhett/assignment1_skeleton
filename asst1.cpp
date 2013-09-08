@@ -1,9 +1,14 @@
 ////////////////////////////////////////////////////////////////////////
 //
+//	 Original:
 //   Harvard Computer Science
 //   CS 175: Computer Graphics
 //   Professor Steven Gortler
 //
+////////////////////////////////////////////////////////////////////////
+//	These skeleton codes are later altered by Ming Jin,
+//	for "CS6533: Interactive Computer Graphics", 
+//	taught by Prof. Andy Nealen at NYU-Poly
 ////////////////////////////////////////////////////////////////////////
 
 #include <vector>
@@ -332,7 +337,7 @@ static void initGlutState(int argc, char **argv) {
   glutInit(&argc,argv);
   glutInitDisplayMode(GLUT_RGBA|GLUT_DOUBLE|GLUT_DEPTH);
   glutInitWindowSize(g_width, g_height);      // create a window
-  glutCreateWindow("CS 175: Hello World");    // title the window
+  glutCreateWindow("CS 6533: Hello World 2D");    // title the window
 
   glutDisplayFunc(display);                   // display rendering callback
   glutReshapeFunc(reshape);                   // window reshape callback
