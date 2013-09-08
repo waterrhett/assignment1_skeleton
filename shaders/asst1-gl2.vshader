@@ -1,4 +1,5 @@
 uniform float uVertexScale;
+uniform float uTime;
 
 attribute vec2 aPosition;
 attribute vec3 aColor;

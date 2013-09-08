@@ -1,6 +1,7 @@
 #version 130
 
 uniform float uVertexScale;
+uniform float uTime;
 uniform sampler2D uTexUnit0, uTexUnit1;
 
 in vec2 vTexCoord0, vTexCoord1;

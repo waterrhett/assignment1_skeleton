@@ -1,6 +1,7 @@
 #version 130
 
 uniform float uVertexScale;
+uniform float uTime;
 
 in vec2 aPosition;
 in vec3 aColor;

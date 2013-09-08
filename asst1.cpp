@@ -13,6 +13,7 @@
 
 #include <vector>
 #include <string>
+#include <time.h>
 #include <memory>
 #include <stdexcept>
 #if __GNUG__
@@ -58,12 +59,15 @@ static bool g_rightClicked     = false;     // is the right mouse button down?
 static float g_objScale        = 1.0;       // scale factor for object
 static int g_leftClickX, g_leftClickY;      // coordinates for mouse left click event
 static int g_rightClickX, g_rightClickY;    // coordinates for mouse right click event
+static float g_time			   = 0.0;		// time for sine func
+
 
 struct ShaderState {
   GlProgram program;
 
   // Handles to uniform variables
   GLint h_uVertexScale;
+  GLint h_uTime;
   GLint h_uTexUnit0, h_uTexUnit1;
 
   // Handles to vertex attributes
@@ -78,6 +82,7 @@ struct ShaderState {
 
     // Retrieve handles to uniform variables
     h_uVertexScale = safe_glGetUniformLocation(h, "uVertexScale");
+	h_uTime = safe_glGetUniformLocation(h, "uTime");
     h_uTexUnit0 = safe_glGetUniformLocation(h, "uTexUnit0");
     h_uTexUnit1 = safe_glGetUniformLocation(h, "uTexUnit1");
 
@@ -222,6 +227,11 @@ static void display(void) {
   safe_glUniform1i(curSS.h_uTexUnit0, 0);
   safe_glUniform1i(curSS.h_uTexUnit1, 1);
   safe_glUniform1f(curSS.h_uVertexScale, g_objScale);
+
+  clock_t t = clock();
+  g_time = (float) t;
+  safe_glUniform1f(curSS.h_uTime, g_time);
+
   g_square->draw(curSS);
 
   glutSwapBuffers();
