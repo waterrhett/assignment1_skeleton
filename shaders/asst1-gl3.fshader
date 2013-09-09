@@ -17,5 +17,10 @@ void main(void) {
   float lerper = clamp(.5 *uVertexScale, 0., 1.);
   float lerper2 = clamp(.5 * uVertexScale + 1.0, 0.0, 1.0);
 
+  // ======================================
+  // TODO: use sin and uTime to interpolate
+  //       between the two images
+  // ======================================
+
   fragColor = ((lerper)*texColor1 + (1.0-lerper)*texColor0) * lerper2 + color * (1.0-lerper2);
 }

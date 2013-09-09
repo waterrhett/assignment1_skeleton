@@ -228,8 +228,20 @@ static void display(void) {
   safe_glUniform1i(curSS.h_uTexUnit1, 1);
   safe_glUniform1f(curSS.h_uVertexScale, g_objScale);
 
+  // =======================================
+  // TODO: 
+  // 1. the aspect ratio should be preserved
+  // 2. the image should not be cropped
+  // =======================================
+
   clock_t t = clock();
   g_time = (float) t;
+   // ========================================
+  // TODO: 
+  // g_time is passed into the fragment shader
+  // as uTime; use uTime there to interpolate
+  // between images
+  // =========================================
   safe_glUniform1f(curSS.h_uTime, g_time);
 
   g_square->draw(curSS);
@@ -350,6 +362,7 @@ static void initGlutState(int argc, char **argv) {
   glutCreateWindow("CS 6533: Hello World 2D");    // title the window
 
   glutDisplayFunc(display);                   // display rendering callback
+  glutIdleFunc(display);					  // idle callback
   glutReshapeFunc(reshape);                   // window reshape callback
   glutMotionFunc(motion);                     // mouse movement callback
   glutMouseFunc(mouse);                       // mouse click callback
