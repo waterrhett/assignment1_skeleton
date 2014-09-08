@@ -12,6 +12,7 @@ endif
 
 ifeq ($(OS), Darwin) # Assume OS X
   CPPFLAGS += -D__MAC__
+  CPPFLAGS += -I/usr/include
   LDFLAGS += -framework GLUT -framework OpenGL
 endif
 
@@ -28,7 +29,8 @@ CXX = g++
 OBJ = $(BASE).o ppm.o glsupport.o
 
 $(BASE): $(OBJ)
-	$(LINK.cpp) -o $@ $^ $(LIBS) -lGLEW 
+	#$(LINK.cpp) -o $@ $^ $(LIBS) -lGLEW 
+	$(LINK.cpp) -o $@ $^ $(LIBS) /usr/lib/libGLEW.a
 
 clean:
 	rm -f $(OBJ) $(BASE)

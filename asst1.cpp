@@ -8,7 +8,7 @@
 ////////////////////////////////////////////////////////////////////////
 //	These skeleton codes are later altered by Ming Jin,
 //	for "CS6533: Interactive Computer Graphics", 
-//	taught by Prof. Andy Nealen at NYU-Poly
+//	taught by Prof. Andy Nealen at NYU
 ////////////////////////////////////////////////////////////////////////
 
 #include <vector>
@@ -16,9 +16,14 @@
 #include <time.h>
 #include <memory>
 #include <stdexcept>
-#if __GNUG__
-#   include <tr1/memory>
-#endif
+// #if __GNUG__
+// #   include <tr1/memory>
+// #endif
+//#ifdef __MAC__
+//#   include <memory>
+//#else
+//#   include <tr1/memory>
+//#endif
 
 #include <GL/glew.h>
 #ifdef __MAC__
@@ -30,8 +35,18 @@
 #include "ppm.h"
 #include "glsupport.h"
 
+// ifdef the followings
+#include <stdio.h>
+#ifdef __MAC__
+#include <unistd.h>
+#include <mach-o/dyld.h>
+#endif
+
 using namespace std;      // for string, vector, iostream and other standard C++ stuff
+#ifndef __MAC__
 using namespace std::tr1; // for shared_ptr
+#endif
+
 
 // G L O B A L S ///////////////////////////////////////////////////
 
@@ -49,7 +64,7 @@ using namespace std::tr1; // for shared_ptr
 // If g_Gl2Compatible=false, shaders with -gl3 suffix will be loaded.
 // To complete the assignment you only need to edit the shader files that get loaded
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-static const bool g_Gl2Compatible = false;
+static const bool g_Gl2Compatible = true;
 
 
 static int g_width             = 512;       // screen width
@@ -439,6 +454,12 @@ static void initTextures() {
 ///  application.
 
 int main(int argc, char **argv) {
+  #ifdef __MAC__
+    string path(argv[0]);
+    string parent_folder_path = path.substr(0, path.find_last_of('/'));
+    chdir(parent_folder_path.c_str());
+  #endif
+
   try {
     initGlutState(argc,argv);
 
